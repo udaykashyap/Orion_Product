@@ -119,6 +119,7 @@ const Product = () => {
             placeholder="Brands"
             onChange={(e) => {
               getData(e.target.value);
+              setPage(1);
             }}
           >
             <option value="Apple">Apple</option>
@@ -131,6 +132,7 @@ const Product = () => {
             placeholder="Gender"
             onChange={(e) => {
               getData(e.target.value);
+              setPage(1);
             }}
           >
             <option value="Girl">Girl</option>
@@ -142,6 +144,7 @@ const Product = () => {
             placeholder="Type"
             onChange={(e) => {
               getData(e.target.value);
+              setPage(1);
             }}
           >
             <option value="Jewellery">Jewellery</option>
@@ -155,6 +158,7 @@ const Product = () => {
             placeholder="Search Product"
             onChange={(e) => {
               getData(e.target.value);
+              setPage(1);
             }}
           />
         </Box>
