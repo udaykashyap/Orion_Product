@@ -10,21 +10,14 @@ const TableCard = ({ handleCartData, ...el }) => {
   };
   return (
     <Tr>
-      <Td display={"flex"} alignItems={"center"} fontWeight={500}>
-        <Image
-          transition={"0.5s"}
-          _hover={{ width: "100px", height: "100px" }}
-          src={el.thumbnail}
-          alt={el.title}
-          width={"50px"}
-          h={"50px"}
-          marginRight="10px"
-        />
-
-        {el.title}
+      <Td fontWeight={500} border={"0px solid red"}>
+        <Image src={el.thumbnail} alt={el.title} width={"100%"} />
       </Td>
+      <Td textAlign={"center"}>{el.title}</Td>
       <Td textAlign={"center"}>{el.brand}</Td>
-      <Td textAlign="center">{el.description}</Td>
+      <Td textAlign="center" color={"blue.400"} fontWeight={500}>
+        {el.description}
+      </Td>
       <Td textAlign="center">{el.rating}</Td>
       <Td textAlign="center" color={"blue.400"} fontWeight={800}>
         ₹{+el.price}

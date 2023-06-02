@@ -17,7 +17,7 @@ import TableCard from "../Components/TableCard";
 const Product = () => {
   const [totalData, setTotalData] = useState([]);
   const [page, setPage] = useState(1);
-  const [cart,setCart]= useState([])
+  const [cart, setCart] = useState([]);
 
   //Getting Data ------------------------------------------
   const getData = async (q = "") => {
@@ -35,7 +35,7 @@ const Product = () => {
   };
 
   //Handling Scroll---------------------------------------
-  const handleScroll = async () => {
+  const handleScroll = () => {
     const tableContainer = document.getElementById("tableContainer");
     const scrollPosition = tableContainer.scrollTop;
     const containerHeight = tableContainer.clientHeight;
@@ -48,6 +48,7 @@ const Product = () => {
     ) {
       setTimeout(() => {
         setPage((prev) => Math.min(prev + 1, 5));
+        tableContainer.scrollTo(0, tableBodyHeight * 0.01);
       }, [2000]);
     } else if (scrollPosition === 0) {
       setTimeout(() => {
@@ -63,14 +64,14 @@ const Product = () => {
     getData();
   };
 
-  const handleCart=()=>{
+  const handleCart = () => {
     if (cart.length < 1) {
-        alert("No Data Selected");
-      } else {
-        alert(cart.length + "data is added");
-        console.log(cart);
-      }
-  }
+      alert("No Data Selected");
+    } else {
+      alert(cart.length + "data is added");
+      console.log(cart);
+    }
+  };
   const handleCartData = (val) => {
     setCart([...cart, val]);
   };
@@ -80,23 +81,30 @@ const Product = () => {
   }, []);
   useEffect(() => {
     const tableContainer = document.getElementById("tableContainer");
-    // const totalPages = Math.floor(totalData.length / 20);
-    // console.log(totalPages);
     tableContainer.addEventListener("scroll", handleScroll);
     return () => tableContainer.removeEventListener("scroll", handleScroll);
   }, [totalData]);
   return (
     <Box width={"100%"} padding={0} margin={0}>
-      <Heading>Orion Products</Heading>
+      <Heading
+        background={"linear-gradient(90deg, red, black)"}
+        backgroundClip="text"
+        textFillColor=" transparent"
+        fontFamily={"serif"}
+        marginTop={"10px"}
+      >
+        Orion Products
+      </Heading>
       <hr />
 
       <Box
         width={"90%"}
-        // h={"80vh"}
-        border={"1px solid black"}
+        // h={"100vh"}
+        // border={"1px solid black"}
         margin={"auto"}
         marginTop={"5%"}
         padding={"20px"}
+        boxShadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
       >
         <Box
           width={"80%"}
@@ -155,6 +163,7 @@ const Product = () => {
           <Table>
             <Thead position="sticky" top={0} zIndex={9} background="white">
               <Tr textAlign={"center"}>
+                <Th textAlign={"center"}>Image</Th>
                 <Th textAlign={"center"}>Title</Th>
                 <Th textAlign={"center"}>Brand</Th>
                 <Th textAlign={"center"}>Description</Th>
@@ -173,20 +182,25 @@ const Product = () => {
               {totalData.length > 0 &&
                 totalData
                   .slice(page * 20 - 20, page * 20)
-                  .map((el) => <TableCard key={el.id} handleCartData={handleCartData} {...el} />)}
+                  .map((el) => (
+                    <TableCard
+                      key={el.id}
+                      handleCartData={handleCartData}
+                      {...el}
+                    />
+                  ))}
             </Tbody>
           </Table>
-          <Box width={"10%"} margin={"auto"}>
-            <Button
-              onClick={handleCart}
-              bgColor={"blue.500"}
-              color={"white"}
-              _hover={{ bgColor: "blue.500", color: "white" }}
-            >
-              Add Selected to Cart
-            </Button>
-          </Box>
-          <br />
+        </Box>
+        <Box width={"10%"} margin={"auto"} marginTop={"30px"}>
+          <Button
+            onClick={handleCart}
+            bgColor={"blue.500"}
+            color={"white"}
+            _hover={{ bgColor: "blue.500", color: "white" }}
+          >
+            Add Selected to Cart
+          </Button>
         </Box>
       </Box>
     </Box>
